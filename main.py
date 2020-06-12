@@ -15,7 +15,7 @@ async def root(request: Request):
     indexIP = "0.0.0.0"
     clientIP = request.client.host
     for cs in ipTable:
-        if cs == ipTable[1]:
+        if clientIP == cs:
             isINFlag = True
         else :
             pass
@@ -29,11 +29,20 @@ async def root(request: Request):
         ipTable.append(initStruct)
         redirectOBJ = wait.redirect[0]+ allocted +wait.redirect[1]
     
-
+    print(ipTable)
     return Response(content=redirectOBJ, media_type="text/html")
 
 def serverAlloc(urls):
-    return urls[1]
+    initList = []
+    
+    def takeElement(elem):
+        return elem[1]
+
+    for num in urls:
+        initList.append(num)
+    initList.sort(key=takeElement)
+    
+    return initList[0][0]
     
 def initAddr(serverIP):
     if not https:
