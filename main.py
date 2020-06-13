@@ -12,11 +12,13 @@ https = False
 @app.get("/")
 async def root(request: Request):
     isINFlag = False
-    indexIP = "0.0.0.0"
+    indexIP = 0
     clientIP = request.client.host
+    
     for cs in ipTable:
         if clientIP == cs:
             isINFlag = True
+            indexIP = indexIP + 1
         else :
             pass
     
@@ -29,7 +31,9 @@ async def root(request: Request):
         ipTable.append(initStruct)
         redirectOBJ = wait.redirect[0]+ allocted +wait.redirect[1]
     
+    
     print(ipTable)
+    indexIP = 0
     return Response(content=redirectOBJ, media_type="text/html")
 
 def serverAlloc(urls):
@@ -40,7 +44,9 @@ def serverAlloc(urls):
 
     for num in urls:
         initList.append(num)
+    
     initList.sort(key=takeElement)
+    print(initList)
     
     return initList[0][0]
     
