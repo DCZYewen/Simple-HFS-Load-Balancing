@@ -3,7 +3,7 @@ import wait
 from starlette.requests import Request
 
 url = "https://baidu.com"
-urls = (["http://10.3.12.77",0],["http://10.3.12.71",0],["http://10.3.12.27",0])#the first means 
+urls = [["http://10.3.12.77:8080",4],["http://10.3.12.71",0],["http://10.3.12.27",0]]#the first means 
 ipTable = []#like 10.3.12.50,10.3.12.55 //client first server come to second
 app = FastAPI()
 https = False
@@ -27,6 +27,12 @@ async def root(request: Request):
         redirectOBJ = wait.redirect[0]+ url +wait.redirect[1]
     else :
         allocted = serverAlloc(urls)
+        for tmp in urls:
+            if tmp[0] == allocted:
+                tmp[1] = tmp[1] + 1
+            else:
+                pass
+
         initStruct = [clientIP,allocted]
         ipTable.append(initStruct)
         redirectOBJ = wait.redirect[0]+ allocted +wait.redirect[1]
