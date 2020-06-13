@@ -16,7 +16,7 @@ async def root(request: Request):
     clientIP = request.client.host
     
     for cs in ipTable:
-        if clientIP == cs:
+        if clientIP == cs[1]:
             isINFlag = True
             indexIP = indexIP + 1
         else :
