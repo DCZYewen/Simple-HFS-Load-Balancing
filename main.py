@@ -1,12 +1,39 @@
 from fastapi import FastAPI , Response
 import wait
 from starlette.requests import Request
+import uvicorn
+import run
+import socket
+import os
+
+
+#获取本机电脑名
+myname = socket.getfqdn(socket.gethostname(  ))
+#获取本机ip
+myaddr = socket.gethostbyname(myname)
+counter = 0
+while counter < 10:
+    print("这个服务器的访问地址是" + myaddr)
+    counter = counter + 1 
+print("\n")
+print("\n")
+print("\n")
+
+os.system('.\gohttpserver.exe -r ./files --port 8080')
 
 url = "https://baidu.com"
-urls = [["http://10.3.12.77:8080",4],["http://10.3.12.71",0],["http://10.3.12.27",0]]#the first means 
 ipTable = []#like 10.3.12.50,10.3.12.55 //client first server come to second
+urls = run.serverlist
 app = FastAPI()
 https = False
+
+
+if __name__ == '__main__':
+    import uvicorn
+    uvicorn.run(app=app,
+                host="0.0.0.0",
+                port=8000,
+                workers=1)
 
 
 @app.get("/")
@@ -35,7 +62,7 @@ async def root(request: Request):
 
         initStruct = [clientIP,allocted]
         ipTable.append(initStruct)
-        redirectOBJ = wait.redirect[0]+ allocted +wait.redirect[1]
+        redirectOBJ = run.redirect[0]+ allocted + run.redirect[1]
     
     
     print(ipTable)
