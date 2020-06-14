@@ -1,4 +1,3 @@
-serverlist = [["http://10.3.12.77:8080",4],["http://10.3.12.71",0],["http://10.3.12.27",0]]#the first means 
 redirect = ('''
 <html>
 <head>
@@ -16,3 +15,4 @@ redirect = ('''
 </div>
 </body>
 </html>''')
+urls = [["http://10.3.12.77:8080",4],["http://10.3.12.71",0],["http://10.3.12.27",0]]#the first means 
